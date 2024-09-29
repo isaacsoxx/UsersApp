@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using FitFlexApp.BLL.Services.Interface;
-using FitFlexApp.DAL.Entities;
-using FitFlexApp.DAL.Repository.Interface;
-using FitFlexApp.DTOs.Model;
-using FitFlexApp.DTOs.Request;
+using UsersApp.BLL.Services.Interface;
+using UsersApp.DAL.Entities;
+using UsersApp.DAL.Repository.Interface;
+using UsersApp.DTOs.Model;
+using UsersApp.DTOs.Request;
 
-namespace FitFlexApp.BLL.Services
+namespace UsersApp.BLL.Services
 {
     public class UserService : IUserService
     {
@@ -25,14 +25,14 @@ namespace FitFlexApp.BLL.Services
             return serviceResponse;
         }
 
-        public async Task<ServiceResponseDTO<UserIncludePlanDTO>> GetUserByIdIncludePlanAsync(int userId)
+        public async Task<ServiceResponseDTO<UserDTO>> GetUserByIdAsync(int userId)
         {
-            var serviceResponse = new ServiceResponseDTO<UserIncludePlanDTO>();
-            var user = await _repository.GetSingleUserIncludeTrainingPlansAsync(userId);
+            var serviceResponse = new ServiceResponseDTO<UserDTO>();
+            var user = await _repository.GetSingleUserAsync(userId);
 
             if (user != null)
             {
-                serviceResponse.Data = _mapper.Map<UserIncludePlanDTO>(user);
+                serviceResponse.Data = _mapper.Map<UserDTO>(user);
             }
             else
             {
@@ -54,7 +54,7 @@ namespace FitFlexApp.BLL.Services
         public async Task<ServiceResponseDTO<bool>> UpdateSingleUserAsync(UserRequestDto user)
         {
             var serviceResponse = new ServiceResponseDTO<bool>();
-            var userToUpdate = await _repository.GetSingleUserIncludeTrainingPlansAsync(user.UserId);
+            var userToUpdate = await _repository.GetSingleUserAsync(user.UserId);
 
             if (userToUpdate != null)
             {

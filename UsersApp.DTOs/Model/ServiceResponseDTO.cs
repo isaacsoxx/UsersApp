@@ -1,5 +1,5 @@
 ﻿
-namespace FitFlexApp.DTOs.Model
+namespace UsersApp.DTOs.Model
 {
     public class ServiceResponseDTO<T>
     {

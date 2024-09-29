@@ -1,7 +1,8 @@
 ﻿using FitFlexApp.DTOs.Model;
 using FitFlexApp.DTOs.Request;
+using UsersApp.DTOs.Model;
 
-namespace FitFlexApp.BLL.Services.Interface
+namespace UsersApp.BLL.Services.Interface
 {
     public interface IAuthenticationService
     {

@@ -1,14 +1,14 @@
-using FitFlexApp.BLL.Services.Interface;
-using FitFlexApp.BLL.Services;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Text;
-using FitFlexApp.DAL.Repository.Interface;
-using FitFlexApp.DAL.Repository;
-using FitFlexApp.DAL.Context;
 using Microsoft.EntityFrameworkCore;
+using UsersApp.BLL.Services.Interface;
+using UsersApp.BLL.Services;
+using UsersApp.DAL.Repository.Interface;
+using UsersApp.DAL.Repository;
+using FitFlexApp.DAL.Context;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()

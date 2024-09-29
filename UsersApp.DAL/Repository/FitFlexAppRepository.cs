@@ -1,9 +1,9 @@
 ﻿using FitFlexApp.DAL.Context;
-using FitFlexApp.DAL.Entities;
-using FitFlexApp.DAL.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
+using UsersApp.DAL.Entities;
+using UsersApp.DAL.Repository.Interface;
 
-namespace FitFlexApp.DAL.Repository
+namespace UsersApp.DAL.Repository
 {
     public class UserRepository : IUserRepository
     {
@@ -16,12 +16,10 @@ namespace FitFlexApp.DAL.Repository
         {
             return await _context.Users.ToListAsync();
         }
-
-        public async Task<User?> GetSingleUserIncludeTrainingPlansAsync(int userId)
+        public async Task<User?> GetSingleUserAsync(int userId)
         {
-            return await _context.Users.Include(u => u.TrainingPlans).Where(u => u.UserId.Equals(userId)).FirstOrDefaultAsync();
+            return await _context.Users.Where(u => u.UserId.Equals(userId)).FirstOrDefaultAsync();
         }
-
         public async Task<bool> CreateSingleUserAsync(User user)
         {
             await _context.Users.AddAsync(user);
@@ -36,7 +34,7 @@ namespace FitFlexApp.DAL.Repository
 
         public async Task<User?> ValidateUserAsync(string email, string password)
         {
-            var user = await _context.Users.Where(u => u.Email.Equals(email)).Include(u => u.AccessLevel).FirstOrDefaultAsync();
+            var user = await _context.Users.Where(u => u.Email.Equals(email)).FirstOrDefaultAsync();
 
             if (user != null && user.Password.Equals(password))
             {

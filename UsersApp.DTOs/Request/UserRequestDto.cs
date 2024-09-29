@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FitFlexApp.DTOs.Request
+namespace UsersApp.DTOs.Request
 {
     public class UserRequestDto
     {

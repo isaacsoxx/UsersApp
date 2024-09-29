@@ -1,7 +1,7 @@
-﻿using FitFlexApp.BLL.Services.Interface;
-using FitFlexApp.DTOs.Request;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using UsersApp.BLL.Services.Interface;
+using UsersApp.DTOs.Request;
 
 namespace FitFlexApp.API.Controllers
 {
@@ -39,7 +39,7 @@ namespace FitFlexApp.API.Controllers
         {
             try
             {
-                var serviceResponse = await _userService.GetUserByIdIncludePlanAsync(userId);
+                var serviceResponse = await _userService.GetUserByIdAsync(userId);
                 return serviceResponse.Error ? StatusCode(serviceResponse.StatusCode, serviceResponse.Message) : Ok(serviceResponse.Data);
             }
             catch (Exception ex)

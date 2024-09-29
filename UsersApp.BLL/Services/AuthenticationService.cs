@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using FitFlexApp.BLL.Services.Interface;
-using FitFlexApp.DAL.Repository.Interface;
-using FitFlexApp.DTOs.Model;
+using UsersApp.BLL.Services.Interface;
+using UsersApp.DAL.Repository.Interface;
+using UsersApp.DTOs.Model;
 
-namespace FitFlexApp.BLL.Services
+namespace UsersApp.BLL.Services
 {
     public class AuthenticationService : IAuthenticationService
     {

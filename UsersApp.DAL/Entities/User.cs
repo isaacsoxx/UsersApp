@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace FitFlexApp.DAL.Entities
+namespace UsersApp.DAL.Entities
 {
     public class User
     {
@@ -20,12 +20,5 @@ namespace FitFlexApp.DAL.Entities
         [Required]
         [MaxLength(128)]
         public string Password { get; set; } = string.Empty;
-
-        [ForeignKey("AccessLevelId")]
-        public AccessLevel? AccessLevel { get; set; } = null;
-        public int? AccessLevelId { get; set; } = null;
-
-        public List<TrainingPlan>? TrainingPlans {get; set;} = null;
-        
     }
 }

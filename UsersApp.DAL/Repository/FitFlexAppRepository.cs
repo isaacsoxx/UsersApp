@@ -1,5 +1,5 @@
-﻿using FitFlexApp.DAL.Context;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using UsersApp.DAL.Context;
 using UsersApp.DAL.Entities;
 using UsersApp.DAL.Repository.Interface;
 

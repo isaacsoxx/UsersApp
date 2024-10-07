@@ -3,15 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 using UsersApp.BLL.Services.Interface;
 using UsersApp.DTOs.Request;
 
-namespace FitFlexApp.API.Controllers
+namespace UsersApp.WebAPI.Controllers
 {
-    [Route("/api/[controller]"), ApiController, Produces("application/json")]
-    public class UserController : ControllerBase
+    [Route("/api/[controller]"), ApiController, Produces("application/json"), Authorize]
+    public class UsersController : ControllerBase
     {
         private ILogger _logger;
         private IUserService _userService;
 
-        public UserController(ILogger<UserController> logger, IUserService userService)
+        public UsersController(ILogger<UsersController> logger, IUserService userService)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 

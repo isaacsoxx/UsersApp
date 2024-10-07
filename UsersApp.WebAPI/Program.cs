@@ -8,7 +8,8 @@ using UsersApp.BLL.Services.Interface;
 using UsersApp.BLL.Services;
 using UsersApp.DAL.Repository.Interface;
 using UsersApp.DAL.Repository;
-using FitFlexApp.DAL.Context;
+using UsersApp.DAL.Context;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -23,11 +24,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(options => options.ReturnHttpNotAcceptable = true)
     .AddNewtonsoftJson()
     .AddXmlDataContractSerializerFormatters();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo { Title = "UsersAppAPI", Version = "v1" });
-    /*options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "UsersAppWebAPI", Version = "v1" });
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
         Description = "Please enter a valid token",
@@ -49,7 +51,7 @@ builder.Services.AddSwaggerGen(options =>
             },
             new string[]{}
         }
-    });*/
+    });
 });
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 
@@ -57,29 +59,31 @@ builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 /* Token authentication */
-/*builder.Services.AddAuthentication("Bearer")
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.TokenValidationParameters = new()
+        options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,
+            //ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration["Authentication:Issuer"],
             ValidAudience = builder.Configuration["Authentication:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["Authentication:SecretForKey"]))
         };
-    });*/
+    });
 
 /* Services persistance */
 builder.Services.AddScoped<IUserService, UserService>();
-/*builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();*/
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 /* Repository persistance */
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 /* EF persistence on azsql */
-builder.Services.AddDbContext<FitFlexAppContext>(options => {
+builder.Services.AddDbContext<FitFlexAppContext>(options =>
+{
     options.UseSqlServer(builder.Configuration.GetConnectionString("AZ_FitFlexDB"));
     options.EnableSensitiveDataLogging();
 });
@@ -89,12 +93,12 @@ builder.Host.UseSerilog();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-// if (app.Environment.IsDevelopment())
-// {
-// Catch any exception
+if (app.Environment.IsDevelopment())
+{
+
+}
 app.UseSwagger();
 app.UseSwaggerUI();
-// }
 
 app.UseHttpsRedirection();
 app.UseRouting();

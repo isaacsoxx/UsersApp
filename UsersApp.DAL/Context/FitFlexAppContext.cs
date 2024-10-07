@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UsersApp.DAL.Entities;
 
-namespace FitFlexApp.DAL.Context
+namespace UsersApp.DAL.Context
 {
     public class FitFlexAppContext : DbContext
     {

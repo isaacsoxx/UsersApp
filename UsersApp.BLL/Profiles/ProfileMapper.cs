@@ -3,7 +3,7 @@ using UsersApp.DAL.Entities;
 using UsersApp.DTOs.Model;
 using UsersApp.DTOs.Request;
 
-namespace FitFlexApp.BLL.Profiles
+namespace UsersApp.BLL.Profiles
 {
     public class ProfileMapper : Profile
     {
